@@ -63,6 +63,7 @@ for counter  in range(1, 5):
         if retval > 0:
             cnt = cnt + 1
             Punteggio = Punteggio + retval
+            print(word, " points=", Punteggio)
 
     if ( cnt > 0 ):
         print ("Messagio numero ", counter, " Punteggio=", Punteggio/cnt, " ", sep=" ")
@@ -77,3 +78,4 @@ for counter  in range(1, 5):
              print ( "parzialmente negativo" )
         elif Punteggio/cnt >= 1:
              print ( "negativo" )
+        print()
