@@ -43,8 +43,8 @@ def contatore_parole_file( fname ):
         else:
             mydict[word] = 1
 
-    # display filename and dictionary ( not sorted )
-    #print(fname, maxoccurancesofword, mydict, sep=" : ")
+    # display dictionary ( not sorted )
+#    print(mydict, sep=" : ")
 
     # display filename and dictionary sorted
     sortdict = {}
@@ -54,13 +54,14 @@ def contatore_parole_file( fname ):
                 sortdict[key] = mydict[key]
 
     print(fname, sortdict, sep=" : ")
+
+    f.close()
 # next file
 
 # main code
 # read all *.txt files in directory
 for fname in glob.glob("*.txt"):
     contatore_parole_file( fname )
-
 
 # open the file specified as parameter 1
 #import sys

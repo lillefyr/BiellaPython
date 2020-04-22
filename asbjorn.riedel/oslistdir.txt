@@ -1,3 +1,0 @@
-How to get all the files (and directories) in the current directory (Python 3)
-
-Following, are simple methods to retrieve only files in the current directory, using os and the listdir() function, in Python 3. Further exploration, will demonstrate how to return folders in the directory, but you will not have the file in the subdirectory, for that you can use walk - discussed later).
