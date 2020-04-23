@@ -7,6 +7,10 @@
 #contatore_parole_file ('sonetto.txt') => {'la': 4, 'fog': 2, ...}
 
 ##########################################################################
+# get character detection library
+# install with:   pip install chardet
+import chardet
+
 # used to extract filenames (without using much regex)
 import glob
 
@@ -23,7 +27,20 @@ def contatore_parole_file( fname ):
     maxoccurancesofword = 0
 
     # open the file, read the data into a string, remove CR and convert to lowercase
-    with open(fname, 'r') as f:
+    # sonetto.txt:  UTF-8 Unicode text, with CRLF line terminators
+    # sonetto3.txt: ISO-8859 text, with CRLF line terminators
+
+    # open the file as a binary file and read all data
+    with open(fname, 'rb') as f:
+        rawdata = f.read()
+
+    # Guess! the encoding, normally OK. Store value found in enc
+    # errorhandling missing if encoding is not found
+    enc = chardet.detect(rawdata)['encoding']
+    f.close()
+
+    # read all file into content
+    with open(fname, 'r', encoding=enc) as f:
         content = f.read().replace('\n', ' ').lower()
 
     # remove all punctuation
@@ -31,7 +48,7 @@ def contatore_parole_file( fname ):
         if char in punctuations:
             content = content.replace(char," ")
 
-    # Split string into a list of words
+    # split string into a list of words
     listofwords = content.split()
 
     # count the occurances of the word in the string
@@ -44,7 +61,7 @@ def contatore_parole_file( fname ):
             mydict[word] = 1
 
     # display dictionary ( not sorted )
-#    print(mydict, sep=" : ")
+    #print(mydict, sep=" : ")
 
     # display filename and dictionary sorted
     sortdict = {}
@@ -54,15 +71,15 @@ def contatore_parole_file( fname ):
                 sortdict[key] = mydict[key]
 
     print(fname, sortdict, sep=" : ")
-
     f.close()
-# next file
+# ready for next file
 
 # main code
 # read all *.txt files in directory
 for fname in glob.glob("*.txt"):
     contatore_parole_file( fname )
 
+# alternative to for statement
 # open the file specified as parameter 1
 #import sys
 #contatore_parole_file( sys.argv[1] )
