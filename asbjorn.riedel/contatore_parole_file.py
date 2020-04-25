@@ -37,7 +37,6 @@ def contatore_parole_file( fname ):
     # Guess! the encoding, normally OK. Store value found in enc
     # errorhandling missing if encoding is not found
     enc = chardet.detect(rawdata)['encoding']
-    f.close()
 
     # read all file into content
     with open(fname, 'r', encoding=enc) as f:
@@ -71,7 +70,6 @@ def contatore_parole_file( fname ):
                 sortdict[key] = mydict[key]
 
     print(fname, sortdict, sep=" : ")
-    f.close()
 # ready for next file
 
 # main code
